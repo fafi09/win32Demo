@@ -1,0 +1,3 @@
+LIBRARY dllvalue.dll
+EXPORTS
+	g_nValue2 @1 DATA
