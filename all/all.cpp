@@ -42,6 +42,34 @@ int rectTop = 600;
 int rectRight = 700;
 int rectBottom = 700;
 
+HWND hDlg = NULL;
+HWND hWndMDIClient = NULL;
+
+BOOL CALLBACK GoToProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARAM lParam) 
+{ 
+    switch (message) 
+    { 
+        case WM_INITDIALOG: 
+			MessageBox(hwndDlg, TEXT("WM_INITDIALOG"), TEXT("dialog"), NULL);
+            return TRUE; 
+ 
+        case WM_COMMAND: 
+            switch (LOWORD(wParam)) 
+            { 
+                case IDOK: 
+                    MessageBox(hwndDlg, TEXT("IDOK"), TEXT("dialog"), NULL);
+                    return TRUE; 
+ 
+                case IDCANCEL: 
+                    DestroyWindow(hwndDlg); 
+                    hDlg = NULL; 
+                    return TRUE; 
+            } 
+    } 
+    return FALSE; 
+} 
+
+
 VOID CALLBACK TimerProc1(
   HWND hwnd,         // handle to window
   UINT uMsg,         // WM_TIMER message
@@ -230,6 +258,14 @@ void OnCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	TCHAR msg[64] = {0};
 	switch(nCmdId)
 	{
+	case ID_32777:
+		//MessageBox(hWnd, TEXT("ID_32777"), TEXT("command"), NULL);
+		if (!IsWindow(hDlg))
+		{
+			hDlg = CreateDialog(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWndMDIClient, GoToProc);
+			ShowWindow(hDlg, SW_SHOW);
+		}
+		break;
 	case ID_32771:
 		//MessageBox(hWnd,L"ID_32771",L"menu",NULL);
 		Wide2Multi(hWnd);
@@ -960,7 +996,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	HWND hWnd = CreateMainWindow(TEXT("mywnd"),hMenu);
 
 	//建立mdi客户区
-	HWND hWndMDIClient = CreateMDIClient(hWnd);
+	hWndMDIClient = CreateMDIClient(hWnd);
 	MoveWindow(hWndMDIClient, 100, 100, 500, 500, TRUE);
 	//建立子窗口
 	//HWND hWndChild = CreateChildWindow(TEXT("child"),hWnd);
@@ -987,6 +1023,8 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	{
 		if(!TranslateAccelerator(hWnd,hAccel,&msg))
 		{
+			if (!IsWindow(hDlg) || !IsDialogMessage(hDlg, &msg)) 
+			{
 			//就是将键盘消息转换成字符消息。
 			//		1 首先检查是否是键盘按键消息    	
 			//		2 如果发现是按键消息，将根据按键，产生
@@ -1001,6 +1039,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 					如果MSG中，HWND窗口句柄为空，
 					DispatchMessage不做任何处理。*/
 			DispatchMessage(&msg);
+			}
 		}
 	}
 
