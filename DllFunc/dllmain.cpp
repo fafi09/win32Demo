@@ -9,9 +9,13 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
+		printf("DLL_PROCESS_ATTACH\n");
 	case DLL_THREAD_ATTACH:
+		printf("DLL_PROCESS_ATTACH\n");
 	case DLL_THREAD_DETACH:
+		printf("DLL_PROCESS_ATTACH\n");
 	case DLL_PROCESS_DETACH:
+		printf("DLL_PROCESS_ATTACH\n");
 		break;
 	}
 	return TRUE;

@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DllClass", "DllClass\DllCla
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DllClassUse", "DllClassUse\DllClassUse.vcxproj", "{3689F533-755E-4932-8462-2FA1709DDB8F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winfs", "winfs\winfs.vcxproj", "{90A1E00F-BBEB-499E-B178-96BE493B28AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -97,6 +99,10 @@ Global
 		{3689F533-755E-4932-8462-2FA1709DDB8F}.Debug|Win32.Build.0 = Debug|Win32
 		{3689F533-755E-4932-8462-2FA1709DDB8F}.Release|Win32.ActiveCfg = Release|Win32
 		{3689F533-755E-4932-8462-2FA1709DDB8F}.Release|Win32.Build.0 = Release|Win32
+		{90A1E00F-BBEB-499E-B178-96BE493B28AB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{90A1E00F-BBEB-499E-B178-96BE493B28AB}.Debug|Win32.Build.0 = Debug|Win32
+		{90A1E00F-BBEB-499E-B178-96BE493B28AB}.Release|Win32.ActiveCfg = Release|Win32
+		{90A1E00F-BBEB-499E-B178-96BE493B28AB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
