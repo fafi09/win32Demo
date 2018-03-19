@@ -127,6 +127,44 @@ int _tmain(int argc, _TCHAR* argv[])
     // LPCTSTR lpRootPathName,//盘符
     // LPCTSTR lpVolumeName);//新名称
 
+	//获取windows目录
+	TCHAR szWndDir[64] = {0};
+	GetWindowsDirectory(szWndDir, 64);
+	printf("windows dir:%s\n",szWndDir);
+
+	//获取系统目录
+	TCHAR szSysDir[MAX_PATH] = {0};
+	GetSystemDirectory(szSysDir, MAX_PATH);
+	printf("system dir:%s\n",szSysDir);
+
+	//获取临时文件目录
+	TCHAR szTmpDir[MAX_PATH] = {0};
+	GetTempPath(MAX_PATH, szTmpDir);
+	printf("temp dir:%s\n",szTmpDir);
+
+	//获取当前目录，应用程序正在使用的目录
+	TCHAR szCurrDir[MAX_PATH] = {0};
+	GetCurrentDirectory(MAX_PATH, szCurrDir);
+	printf("current dir:%s\n",szCurrDir);
+
+	//设置当前的目录
+	SetCurrentDirectory(TEXT("C:\\study"));
+
+	memset(szCurrDir, 0, MAX_PATH);
+	
+	GetCurrentDirectory(MAX_PATH, szCurrDir);
+	printf("current dir:%s\n",szCurrDir);
+
+
+	//创建目录
+	//CreateDirectory(TEXT("D:\\1\\win32"),NULL);
+
+	//删除目录
+	//RemoveDirectory(TEXT("D:\\1\\2\\4\\8"));
+
+	//修改目录
+	//MoveFile(TEXT("D:\\1\\2\\4\\9"),TEXT("D:\\1\\2\\4\\11"));
+
 
 	getch();
 	return 0;
