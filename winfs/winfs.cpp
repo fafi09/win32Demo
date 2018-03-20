@@ -89,6 +89,176 @@ void ShowDiskFreeSpace(LPWSTR DriveName)
 		TotalNumberOfFreeBytes);
 }
 
+
+void Create()
+{
+	HANDLE hFile = CreateFile(TEXT("D:\\tst.txt"),
+					GENERIC_READ | GENERIC_WRITE,
+					NULL,
+					NULL,
+					CREATE_ALWAYS,
+					FILE_ATTRIBUTE_NORMAL,
+					NULL);
+	if(NULL == hFile)
+	{
+		DWORD error = GetLastError();
+		printf("error=%d\n",error);
+	}
+	CloseHandle(hFile);
+}
+
+
+void Write()
+{
+	HANDLE hFile = CreateFile(TEXT("D:\\tst.txt"),
+		GENERIC_WRITE,
+		NULL,
+		NULL,
+		OPEN_EXISTING,
+		FILE_ATTRIBUTE_NORMAL,
+		NULL);
+
+	char szText[] = "Hello file";
+	DWORD nWrite = 0;
+	WriteFile(hFile, szText, strlen(szText), &nWrite, NULL); 
+	printf("nWrite=%d\n",nWrite);
+	CloseHandle(hFile);
+}
+
+void Read()
+{
+	HANDLE hFile = CreateFile(TEXT("D:\\tst.txt"),
+		GENERIC_READ,
+		NULL,
+		NULL,
+		OPEN_EXISTING,
+		FILE_ATTRIBUTE_NORMAL,
+		NULL);
+
+	char szText[64] = {0};
+	DWORD nRead = 0;
+	//设置文件的读写位置
+	SetFilePointer(hFile, 1, 0, FILE_BEGIN);
+
+	ReadFile(hFile,szText, 64, &nRead, NULL); 
+	printf("nRead=%d, szText=%s\n",nRead, szText);
+	CloseHandle(hFile);
+}
+
+void FileSize()
+{
+	HANDLE hFile = CreateFile(TEXT("D:\\Info.rar"),
+		GENERIC_READ,
+		NULL,
+		NULL,
+		OPEN_EXISTING,
+		FILE_ATTRIBUTE_NORMAL,
+		NULL);
+
+	//LARGE_INTEGER li;
+
+	DWORD nFileSize = 0;
+	DWORD dwSize = GetFileSize(hFile, &nFileSize);
+	if(dwSize == INVALID_FILE_SIZE)
+	{
+		DWORD dwError = GetLastError();
+		printf("error=%d\n",dwError);
+	}
+	//li.LowPart = dwSize;
+	//li.HighPart = nFileSize;
+
+	printf("nFileSize=%ld\n",dwSize);
+
+
+	//大文件超过0xffffffff
+	LARGE_INTEGER lnFileSize;
+	GetFileSizeEx(hFile, &lnFileSize);
+	printf("lnFilesize=%ld\n",lnFileSize);
+
+	CloseHandle(hFile);
+}
+
+void OperateFile()
+{
+	CopyFile(
+		TEXT("D:\\tst.txt"),
+		TEXT("D:\\tst1.txt"), 
+		TRUE);
+
+	DeleteFile(TEXT("D:\\tst.txt"));
+}
+
+void PrintFileTime(LPSTR name, LPFILETIME pFileTime)
+{
+	//将文件时间转化为本时区时间
+	FileTimeToLocalFileTime(pFileTime, pFileTime);
+	//将文件时间转化为系统时间
+	SYSTEMTIME systime = {0};
+	FileTimeToSystemTime(pFileTime, &systime);
+	printf("%s: %d-%d-%d %d:%d:%d\n",name,
+		systime.wYear,systime.wMonth,systime.wDay,
+		systime.wHour,systime.wMinute,systime.wSecond);
+}
+
+void Attri()
+{
+	DWORD nAttr = GetFileAttributes(TEXT("D:\\tst1.txt"));
+	printf("nAttr=%08X\n",nAttr);
+	switch(nAttr)
+	{
+	case FILE_ATTRIBUTE_NORMAL:
+		printf("FILE_ATTRIBUTE_NORMAL\n");
+		break;
+	case FILE_ATTRIBUTE_ARCHIVE:
+		printf("FILE_ATTRIBUTE_ARCHIVE\n");
+		break;
+	}
+
+	WIN32_FILE_ATTRIBUTE_DATA data= {0};
+	GetFileAttributesEx(
+		TEXT("D:\\tst1.txt"),
+		GetFileExInfoStandard,
+		&data);
+
+	PrintFileTime("CreateTime", &data.ftCreationTime);
+	PrintFileTime("AccessTime", &data.ftLastAccessTime);
+	PrintFileTime("WriteTime", &data.ftLastWriteTime);
+}
+
+void Find(LPCWSTR szFileName, LPCWSTR szType)
+{
+
+	TCHAR szFind[MAX_PATH] = {0};
+	wsprintf(szFind,TEXT("%s%s"), szFileName, szType);
+
+	WIN32_FIND_DATAW data = {0};
+	HANDLE hFind 
+		= FindFirstFile(szFind, &data);
+
+	BOOL bRet = TRUE;
+	while(bRet == TRUE)
+	{
+		if(data.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY)
+		{
+			
+			if(data.cFileName[0] != '.')
+			{
+				wprintf(TEXT("+[%s]\n"),data.cFileName);
+				TCHAR szNextFile[MAX_PATH] = {0};
+				wsprintf(szNextFile,TEXT("%s%s\\"), szFileName, data.cFileName);
+				Find(szNextFile, szType);
+			}
+		}
+		else
+		{
+			wprintf(TEXT("-[%s]\n"),data.cFileName);
+		}
+		bRet = FindNextFile(hFind, &data);
+	}
+
+	FindClose(hFind);
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	//返回一个DWORD值,这个值
@@ -165,7 +335,24 @@ int _tmain(int argc, _TCHAR* argv[])
 	//修改目录
 	//MoveFile(TEXT("D:\\1\\2\\4\\9"),TEXT("D:\\1\\2\\4\\11"));
 
+	//创建文件
+	Create();
+	//写入文件
+	Write();
+	//读文件
+	Read();
 
+	//文件的大小
+	FileSize();
+
+	//文件操作
+	OperateFile();
+
+	//文件属性
+	Attri();
+
+	//搜索目录
+	Find(TEXT("D:\\1\\"),TEXT("*.*"));
 	getch();
 	return 0;
 }
