@@ -35,6 +35,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winfs", "winfs\winfs.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winmem", "winmem\winmem.vcxproj", "{935E4CF9-BD96-4E28-8ED9-BA6DD9FC9420}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winprocess", "winprocess\winprocess.vcxproj", "{D1F73535-B026-49CD-B7EB-37A2E25C4D5B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChildProcess", "ChildProcess\ChildProcess.vcxproj", "{1CFA254E-AF30-40CB-ADA3-83AFF081696E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -109,6 +113,14 @@ Global
 		{935E4CF9-BD96-4E28-8ED9-BA6DD9FC9420}.Debug|Win32.Build.0 = Debug|Win32
 		{935E4CF9-BD96-4E28-8ED9-BA6DD9FC9420}.Release|Win32.ActiveCfg = Release|Win32
 		{935E4CF9-BD96-4E28-8ED9-BA6DD9FC9420}.Release|Win32.Build.0 = Release|Win32
+		{D1F73535-B026-49CD-B7EB-37A2E25C4D5B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D1F73535-B026-49CD-B7EB-37A2E25C4D5B}.Debug|Win32.Build.0 = Debug|Win32
+		{D1F73535-B026-49CD-B7EB-37A2E25C4D5B}.Release|Win32.ActiveCfg = Release|Win32
+		{D1F73535-B026-49CD-B7EB-37A2E25C4D5B}.Release|Win32.Build.0 = Release|Win32
+		{1CFA254E-AF30-40CB-ADA3-83AFF081696E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1CFA254E-AF30-40CB-ADA3-83AFF081696E}.Debug|Win32.Build.0 = Debug|Win32
+		{1CFA254E-AF30-40CB-ADA3-83AFF081696E}.Release|Win32.ActiveCfg = Release|Win32
+		{1CFA254E-AF30-40CB-ADA3-83AFF081696E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
