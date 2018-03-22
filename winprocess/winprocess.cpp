@@ -115,7 +115,15 @@ void Wait()
 {
 	STARTUPINFO si = {0};
 	PROCESS_INFORMATION pi = {0};
-	
+	si.cb = sizeof(si);
+
+	CreateProcess(TEXT("C:\\Windows\\System32\\mspaint.exe"),
+		NULL,NULL,NULL,FALSE, NULL,NULL,NULL,&si,&pi);
+
+	printf("mspaint is running\n");
+	//等待进程结束
+	WaitForSingleObject(pi.hProcess, INFINITE);
+	printf("mspaint is stop\n");
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -128,6 +136,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Create();
 	//Terminate(66620);
 
+	Wait();
 	getch();
 	return 0;
 }
