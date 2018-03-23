@@ -126,6 +126,55 @@ void Wait()
 	printf("mspaint is stop\n");
 }
 
+HANDLE Create(LPTSTR szPath)
+{
+	STARTUPINFO si = {0};
+	si.cb = sizeof(si);
+	PROCESS_INFORMATION pi = {0};
+
+	CreateProcess(szPath,NULL,NULL,NULL,
+		FALSE,NULL,NULL,NULL,&si, &pi);
+
+	return pi.hProcess;
+}
+
+void Job()
+{
+	//创建作业
+	HANDLE hJob 
+		= CreateJobObject(NULL, TEXT("myJob"));
+
+	//设置作业权限
+	JOBOBJECT_BASIC_UI_RESTRICTIONS ui = {0};
+	
+	ui.UIRestrictionsClass 
+		= JOB_OBJECT_UILIMIT_READCLIPBOARD |
+		  JOB_OBJECT_UILIMIT_WRITECLIPBOARD;
+
+	SetInformationJobObject(
+		hJob,
+		JobObjectBasicUIRestrictions,
+		&ui,
+		sizeof(ui));
+
+	//将进程加入到作业
+	HANDLE hProc 
+		= Create(TEXT("C:\\Windows\\System32\\calc.exe"));
+
+	AssignProcessToJobObject(hJob, hProc);
+
+	hProc = Create(TEXT("C:\\Windows\\System32\\calc.exe"));
+	AssignProcessToJobObject(hJob, hProc);
+
+	getch();
+
+	//结束作业
+	TerminateJobObject(hJob, 0);
+
+	//关闭Job
+	CloseHandle(hJob);
+
+}
 int _tmain(int argc, _TCHAR* argv[])
 {
 	EnvStrings();
@@ -133,10 +182,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	ProcInfo();
 	ProcessModule();
 
-	Create();
+	//Create();
 	//Terminate(66620);
 
-	Wait();
+	//Wait();
+
+	Job();
 	getch();
 	return 0;
 }
