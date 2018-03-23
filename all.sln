@@ -39,6 +39,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winprocess", "winprocess\wi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChildProcess", "ChildProcess\ChildProcess.vcxproj", "{1CFA254E-AF30-40CB-ADA3-83AFF081696E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winthread", "winthread\winthread.vcxproj", "{24EE3F33-0F17-4410-BD90-56B68DBDDF4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -121,6 +123,10 @@ Global
 		{1CFA254E-AF30-40CB-ADA3-83AFF081696E}.Debug|Win32.Build.0 = Debug|Win32
 		{1CFA254E-AF30-40CB-ADA3-83AFF081696E}.Release|Win32.ActiveCfg = Release|Win32
 		{1CFA254E-AF30-40CB-ADA3-83AFF081696E}.Release|Win32.Build.0 = Release|Win32
+		{24EE3F33-0F17-4410-BD90-56B68DBDDF4C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{24EE3F33-0F17-4410-BD90-56B68DBDDF4C}.Debug|Win32.Build.0 = Debug|Win32
+		{24EE3F33-0F17-4410-BD90-56B68DBDDF4C}.Release|Win32.ActiveCfg = Release|Win32
+		{24EE3F33-0F17-4410-BD90-56B68DBDDF4C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
