@@ -24,6 +24,24 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="atomlock.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="criticalsection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="event.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mymutex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mysemphore.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mytimer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

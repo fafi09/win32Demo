@@ -75,6 +75,12 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="atomlock.h" />
+    <ClInclude Include="criticalsection.h" />
+    <ClInclude Include="event.h" />
+    <ClInclude Include="mymutex.h" />
+    <ClInclude Include="mysemphore.h" />
+    <ClInclude Include="mytimer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
