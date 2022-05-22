@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "all", "all\all.vcxproj", "{58B61389-379E-420D-A224-EEB074390D11}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "win32Frame", "win32Frame\win32Frame.vcxproj", "{65F54EDB-2B65-4840-A384-A229C0E1D07B}"
@@ -40,6 +40,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChildProcess", "ChildProcess\ChildProcess.vcxproj", "{1CFA254E-AF30-40CB-ADA3-83AFF081696E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winthread", "winthread\winthread.vcxproj", "{24EE3F33-0F17-4410-BD90-56B68DBDDF4C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winhttp", "winhttp\winhttp.vcxproj", "{FE3D15FA-2876-4B46-B02F-7BABC6B250BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,10 @@ Global
 		{24EE3F33-0F17-4410-BD90-56B68DBDDF4C}.Debug|Win32.Build.0 = Debug|Win32
 		{24EE3F33-0F17-4410-BD90-56B68DBDDF4C}.Release|Win32.ActiveCfg = Release|Win32
 		{24EE3F33-0F17-4410-BD90-56B68DBDDF4C}.Release|Win32.Build.0 = Release|Win32
+		{FE3D15FA-2876-4B46-B02F-7BABC6B250BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE3D15FA-2876-4B46-B02F-7BABC6B250BD}.Debug|Win32.Build.0 = Debug|Win32
+		{FE3D15FA-2876-4B46-B02F-7BABC6B250BD}.Release|Win32.ActiveCfg = Release|Win32
+		{FE3D15FA-2876-4B46-B02F-7BABC6B250BD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
