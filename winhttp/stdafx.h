@@ -12,6 +12,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include "winhttp.h"
+#include "cJSON.h"
 
 #pragma comment(lib, "WinHttp.lib")
 // TODO: 在此处引用程序需要的其他头文件
