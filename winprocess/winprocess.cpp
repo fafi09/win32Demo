@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "../psapi/PSAPI.H"
+#include <TlHelp32.h>
 #pragma comment(lib,"../psapi/Psapi.Lib")
 
 void EnvStrings()
@@ -175,20 +176,69 @@ void Job()
 	CloseHandle(hJob);
 
 }
+
+HANDLE GetProcessHandle(LPCWSTR lpName)
+{
+     DWORD dwPid = 0;
+     HANDLE hProcess = NULL;
+     HANDLE hProcessSnap;
+     PROCESSENTRY32 pe32;
+
+    // Take a snapshot of all processes in the system.
+     hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+     if (hProcessSnap == INVALID_HANDLE_VALUE)
+     {
+         //printf("Error: CreateToolhelp32Snapshot (of processes)\r\n");
+         return NULL;
+     }
+
+    // Set the size of the structure before using it.
+     pe32.dwSize = sizeof(PROCESSENTRY32);
+
+    // Retrieve information about the first process,
+     // and exit if unsuccessful
+     if (!Process32First(hProcessSnap, &pe32))
+     {
+         //printf("Error: Process32First\r\n"); // show cause of failure
+         CloseHandle(hProcessSnap);          // clean the snapshot object
+         return NULL;
+     }
+
+    // Now walk the snapshot of processes, and
+     // display information about each process in turn
+     int namelen = 200;
+     char name[201] = { 0 };
+     do
+     {
+         if (!wcscmp(pe32.szExeFile, lpName)) {
+             dwPid = pe32.th32ProcessID;
+             hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwPid);
+             break;
+         }
+
+    } while (Process32Next(hProcessSnap, &pe32));
+
+    CloseHandle(hProcessSnap);
+     return hProcess;
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-	EnvStrings();
-	EnvVariable(TEXT("testenv"));
-	ProcInfo();
-	ProcessModule();
+	//EnvStrings();
+	//EnvVariable(TEXT("testenv"));
+	//ProcInfo();
+	//ProcessModule();
 
 	//Create();
 	//Terminate(66620);
 
 	//Wait();
 
-	Job();
-	getch();
+	//Job();
+	//getch();
+
+	HANDLE hProcess = GetProcessHandle(TEXT("QQ.exe"));
+	TerminateProcess(hProcess, 0);
 	return 0;
 }
 
